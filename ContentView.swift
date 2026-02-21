@@ -8,6 +8,9 @@ struct ContentView: View {
     @State private var totalAttempts = 0
     @State private var showResult = false
     @State private var isCorrect = false
+    @State private var timeRemaining = 5
+    
+    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
         VStack(spacing: 30) {
@@ -18,6 +21,9 @@ struct ContentView: View {
             Text("\(number)")
                 .font(.largeTitle)
                 .bold()
+            
+            Text("Time: \(timeRemaining)")
+                .font(.headline)
             
             if showResult {
                 Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
@@ -39,6 +45,15 @@ struct ContentView: View {
                 .font(.headline)
         }
         .padding()
+        .onReceive(timer) { _ in
+            if timeRemaining > 0 {
+                timeRemaining -= 1
+            } else {
+                wrongCount += 1
+                totalAttempts += 1
+                generateNewNumber()
+            }
+        }
     }
     
     func checkAnswer(userAnswer: Bool) {
@@ -54,6 +69,12 @@ struct ContentView: View {
         
         totalAttempts += 1
         showResult = true
+        generateNewNumber()
+    }
+    
+    func generateNewNumber() {
         number = Int.random(in: 1...100)
+        timeRemaining = 5
+        showResult = false
     }
 }
