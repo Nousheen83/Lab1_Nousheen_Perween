@@ -69,9 +69,9 @@ struct ContentView: View {
         }
         .alert(isPresented: $showDialog) {
             Alert(
-                title: Text("Results"),
-                message: Text("Correct: \(correctCount)\nWrong: \(wrongCount)"),
-                dismissButton: .default(Text("OK"))
+                title: Text("10 Attempts Summary"),
+                message: Text("You answered:\n\n✅ Correct: \(correctCount)\n❌ Wrong: \(wrongCount)"),
+                dismissButton: .default(Text("Continue"))
             )
         }
     }
