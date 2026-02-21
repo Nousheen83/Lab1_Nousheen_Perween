@@ -33,14 +33,19 @@ struct ContentView: View {
                     .font(.largeTitle)
             }
             
-            HStack(spacing: 40) {
-                Button("Prime") {
-                    checkAnswer(userAnswer: true)
-                }
-                Button("Not Prime") {
-                    checkAnswer(userAnswer: false)
-                }
-            }
+            HStack(spacing: 30) {
+                Button("Prime") { checkAnswer(userAnswer: true) }
+                    .padding()
+                    .background(Color.blue)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+    
+                Button("Not Prime") { checkAnswer(userAnswer: false) }
+                    .padding()
+                    .background(Color.orange)
+                    .foregroundColor(.white)
+                    .cornerRadius(10)
+        }
             
             VStack {
                 Text("Correct: \(correctCount)")
