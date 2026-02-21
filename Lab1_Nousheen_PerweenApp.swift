@@ -1,3 +1,5 @@
+// Starting point for the SwiftUI app, defining the main entry point and launching ContentView.
+
 import SwiftUI
 
 @main
