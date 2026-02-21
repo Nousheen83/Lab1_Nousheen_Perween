@@ -1,3 +1,5 @@
+//Prime helper file to check if a number is prime or not
+
 import Foundation
 
 struct PrimeHelper {
