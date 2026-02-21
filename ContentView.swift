@@ -54,7 +54,8 @@ struct ContentView: View {
             }
             .font(.headline)
         }
-        .padding()
+        .padding()  
+        .background(Color(.systemGray6))
         .onReceive(timer) { _ in
             if timeRemaining > 0 {
                 timeRemaining -= 1
