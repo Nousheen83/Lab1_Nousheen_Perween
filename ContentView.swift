@@ -26,6 +26,7 @@ struct ContentView: View {
             
             Text("Time Left: \(timeRemaining)")
                 .font(.headline)
+                .foregroundColor(timeRemaining <= 2 ? .red : .black)
             
             if showResult {
                 Image(systemName: isCorrect ? "checkmark.circle.fill" : "xmark.circle.fill")
