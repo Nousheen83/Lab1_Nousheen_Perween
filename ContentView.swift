@@ -14,16 +14,17 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var body: some View {
-        VStack(spacing: 30) {
+        VStack(spacing: 25) {
             
-            Text("Is this number Prime?")
-                .font(.title)
-            
-            Text("\(number)")
+            Text("Prime Number Game")
                 .font(.largeTitle)
                 .bold()
             
-            Text("Time: \(timeRemaining)")
+            Text("\(number)")
+                .font(.system(size: 60))
+                .bold()
+            
+            Text("Time Left: \(timeRemaining)")
                 .font(.headline)
             
             if showResult {
@@ -36,14 +37,17 @@ struct ContentView: View {
                 Button("Prime") {
                     checkAnswer(userAnswer: true)
                 }
-                
                 Button("Not Prime") {
                     checkAnswer(userAnswer: false)
                 }
             }
             
-            Text("Attempts: \(totalAttempts)")
-                .font(.headline)
+            VStack {
+                Text("Correct: \(correctCount)")
+                Text("Wrong: \(wrongCount)")
+                Text("Attempts: \(totalAttempts)")
+            }
+            .font(.headline)
         }
         .padding()
         .onReceive(timer) { _ in
@@ -58,7 +62,7 @@ struct ContentView: View {
         }
         .alert(isPresented: $showDialog) {
             Alert(
-                title: Text("Results after 10 Attempts"),
+                title: Text("Results"),
                 message: Text("Correct: \(correctCount)\nWrong: \(wrongCount)"),
                 dismissButton: .default(Text("OK"))
             )
