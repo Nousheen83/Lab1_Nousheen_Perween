@@ -9,6 +9,7 @@ struct ContentView: View {
     @State private var showResult = false
     @State private var isCorrect = false
     @State private var timeRemaining = 5
+    @State private var showDialog = false
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -51,8 +52,16 @@ struct ContentView: View {
             } else {
                 wrongCount += 1
                 totalAttempts += 1
+                checkDialog()
                 generateNewNumber()
             }
+        }
+        .alert(isPresented: $showDialog) {
+            Alert(
+                title: Text("Results after 10 Attempts"),
+                message: Text("Correct: \(correctCount)\nWrong: \(wrongCount)"),
+                dismissButton: .default(Text("OK"))
+            )
         }
     }
     
@@ -69,7 +78,14 @@ struct ContentView: View {
         
         totalAttempts += 1
         showResult = true
+        checkDialog()
         generateNewNumber()
+    }
+    
+    func checkDialog() {
+        if totalAttempts % 10 == 0 {
+            showDialog = true
+        }
     }
     
     func generateNewNumber() {
