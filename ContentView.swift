@@ -5,6 +5,7 @@ struct ContentView: View {
     @State private var number = Int.random(in: 1...100)
     @State private var correctCount = 0
     @State private var wrongCount = 0
+    @State private var totalAttempts = 0
     @State private var showResult = false
     @State private var isCorrect = false
     
@@ -33,6 +34,9 @@ struct ContentView: View {
                     checkAnswer(userAnswer: false)
                 }
             }
+            
+            Text("Attempts: \(totalAttempts)")
+                .font(.headline)
         }
         .padding()
     }
@@ -48,6 +52,7 @@ struct ContentView: View {
             isCorrect = false
         }
         
+        totalAttempts += 1
         showResult = true
         number = Int.random(in: 1...100)
     }
